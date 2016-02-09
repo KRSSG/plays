@@ -21,52 +21,55 @@ namespace Strategy
 
 namespace Strategy
 {
-#ifndef PS_CLASS
-# error Macro PS_CLASS has to be defined as the name of one of the derived classed of class PS
-#endif
+  //Error This Line:3 ***********************************
+// #ifndef PS_CLASS
+// #error Macro PS_CLASS has to be defined as the name of one of the derived classed of class PS
+// #endif
 
 // PS_CLASS
   class PExec : private PS 
   {
-  private:
+    private:
 
-  // Change the private members .. do we need them 
+   //  // Change the private members .. do we need them 
 
-    Play::Result playResult;
-    //Robot*       robot[HomeTeam::SIZE];
-    //Util::CS*    tacticCS[HomeTeam::SIZE];
-		int roleIDMap[HomeTeam::SIZE];   //HomeTeam::SIZE 						// roleIDMap[i] = robot id with ith role.
-  public:
-    PExec(BeliefState* state);
+       Play::Result playResult;
+   //    //Robot*       robot[HomeTeam::SIZE];
+   //    //Util::CS*    tacticCS[HomeTeam::SIZE];
 
-    ~PExec();
+       int roleIDMap[SIZE];   //HomeTeam::SIZE 	state.homeDetected.size()					// roleIDMap[i] = robot id with ith role.  //This Line**************
+    public:
+      PExec(BeliefState* state);
 
-  private:
-    // Stores the index to the tactics in all role that is to be executed by the team
-    unsigned int currTacticIdx;
+      ~PExec();
 
-    // Current tactic in execution by each bot
-    //std::pair<Tactic::ID, Tactic::Param> currTactic[HomeTeam::SIZE];
+    private:
+      // Stores the index to the tactics in all role that is to be executed by the team
+      unsigned int currTacticIdx;
 
-    void assignRoles(bool isReassign);
+      // Current tactic in execution by each bot
+      std::pair<Tactic::ID, Tactic::Param> currTactic[SIZE];
 
-    bool canTransit(void);
+      void assignRoles(bool isReassign);
 
-    bool tryTransit(void);
+      bool canTransit(void);
 
-	public:
-  
-    void selectPlay(int *pID);
-	
-	void selectfromGUI(int pID);
+      bool tryTransit(void);
 
-    void executePlay(void);
+  	public:
+    
+      void selectPlay(int *pID);
+  	
+  	void selectfromGUI(int pID);
 
-    void evaluatePlay(void);
+      void executePlay(void);
 
-    bool playTerminated(void);
+      void evaluatePlay(void);
 
-    bool playCompleted(void);
+      bool playTerminated(void);
+
+      bool playCompleted(void);
+
   }; // class PExec
 } // namespace Strategy
 

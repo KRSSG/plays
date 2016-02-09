@@ -196,23 +196,23 @@ include_directories(include include/plays ${catkin_INCLUDE_DIRS})
 
 
 ## Including directiories and adding executables left
-
+#/////////////////////////////////////////////////////////////////////////
 set(src 
     ${playsSrc}
     src/pExec.cpp
     src/playBook.cpp
-    src/play_run.cpp
-    src/ps.cpp
+   # src/play_run.cpp
+   # src/ps.cpp
     )
 
 add_library(plays ${src})
-target_link_libraries(plays ${catkin_LIBRARIES})
-
+# target_link_libraries(plays ${catkin_LIBRARIES})
+#/////////////////////////////////////////////////////////////////////////////
 # for installilng the library so it can be used by other packages
-install(TARGETS plays
-        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-        RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})
+# install(TARGETS plays
+#        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#        RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})
 
 # for installing the header files
 install(DIRECTORY include/${PROJECT_NAME}/

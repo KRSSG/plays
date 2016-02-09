@@ -41,6 +41,8 @@
 */
 class Timer{
   timeval tv1,tv2;
+  struct timeval timeStart, timeSplit, timeStop;
+  bool timerStarted;
 public:
   void start()  {gettimeofday(&tv1,NULL);}
   void stop()   {gettimeofday(&tv2,NULL);}
@@ -49,7 +51,13 @@ public:
                         (tv2.tv_usec - tv1.tv_usec) * 1.0E-6);}
   double timeMSec() {return(time() * 1.0E3);}
   double timeUSec() {return(time() * 1.0E6);}
-
+  inline int split(void)
+    {
+      assert(timerStarted == true);
+      int ret = gettimeofday(&timeSplit, NULL);
+      assert(ret == 0);
+      return ((timeSplit.tv_sec - timeStart.tv_sec) * 1000 + (timeSplit.tv_usec - timeStart.tv_usec) / 1000);
+    }
   double interval(){
     double t;
     gettimeofday(&tv2,NULL);

@@ -1,10 +1,10 @@
-// Play Selector class definitions
+// // Play Selector class definitions
 
 #ifndef PS_H
 #define PS_H
 
 #include "playBook.h"
-#include "play.hpp"
+ #include "play.hpp"  
 #include <krssg_ssl_msgs/BeliefState.h>
 
 using krssg_ssl_msgs::BeliefState;
@@ -20,12 +20,12 @@ namespace Strategy
 
   protected:
     PlayID       playID;
-    float        pProb[PlayBook::MAX_PLAYS];
-    bool         appl[PlayBook::MAX_PLAYS];
+      float        pProb[PlayBook::MAX_PLAYS];
+      bool         appl[PlayBook::MAX_PLAYS];
 
-	void         select(int *playid=NULL);
-	//void		selectfromStr_Gui(int pID);
-    virtual void updateWeights(Play::Result termResult) const = 0;
+  	 void         select(int *playid=NULL);
+  	//void		selectfromStr_Gui(int pID);
+  //  virtual void updateWeights(Play::Result termResult) const = 0;
     
   public:
     PS(const BeliefState* state);

@@ -65,7 +65,7 @@ namespace Strategy
 
   protected:
     const BeliefState* state;
-    Play*              playList[MAX_PLAYS];
+    Play* playList[MAX_PLAYS];
 
   public:
     PlayBook(const BeliefState* state);
