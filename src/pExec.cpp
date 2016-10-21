@@ -73,6 +73,7 @@ namespace Strategy
           selTactic = TacticFactory::instance()->Create(tID, roleIdx);
           bestBot=(*selTactic).chooseBestBot(bs,freeBots,tParam);
           selTactic.reset ();
+          cout<<"best bot for "<<tID<<" is "<<bestBot<<endl;
           //bestBot = robot[roleIdx]->curTactic.get()->chooseBestBot(bs,freeBots, tParam); 
         }
         roleBotMapping[roleIdx]=bestBot;
@@ -194,7 +195,7 @@ namespace Strategy
   bool PExec::transit(krssg_ssl_msgs::BeliefState &bs)
   {
     fstream f;
-    f.open("/home/ssl/catkin_ws/src/plays/playRunning.txt",fstream::out | fstream::app);
+    f.open("/home/gunjan/catkin_ws/src/play/playRunning.txt",fstream::out | fstream::app);
     f<<"currTacticIdx : "<<currTacticIdx[0]<<","<<currTacticIdx[1]<<","<<currTacticIdx[2]<<","<<currTacticIdx[3]<<","<<currTacticIdx[4]<<","<<currTacticIdx[5]<<endl;
     if (playID == PlayBook::None)
     {
@@ -288,7 +289,7 @@ namespace Strategy
     updateWeights(playResult);
   } // evaluatePlay
 
-  bool PExec::playTerminated(void)
+  bool PExec::playTerminated(krssg_ssl_msgs::BeliefState &bs)
   {
     if (playID == PlayBook::None)
     {
@@ -307,7 +308,11 @@ namespace Strategy
      * to the Play class, the evaluation of the completion of the play is done here
      * instead of being done in the done() function of the individual plays
      */
-    if (playCompleted())
+    fstream f;
+    f.open("/home/gunjan/catkin_ws/src/play/completed.txt",fstream::out | fstream::app);
+    f<<"play completed "<<playCompleted(bs)<<endl;
+    f.close();
+    if (playCompleted(bs))
     {
       playResult = Play::COMPLETED;
       return true;
@@ -325,13 +330,25 @@ namespace Strategy
     }
   } // playTerminated
 
-  bool PExec::playCompleted(void)
+  bool PExec::playCompleted(krssg_ssl_msgs::BeliefState &bs)
   {
     Play* currPlay = playList[playID];
     for (int roleID = 0; roleID < HomeTeam::SIZE; ++roleID)
     {
-      if(currTacticIdx[roleID]<currPlay->roleList[roleID].size())
+
+      std::string tID  = currPlay->roleList[roleID][currTacticIdx[roleID]].first;
+      Tactic::Param tParam  = currPlay->roleList[roleID][currTacticIdx[roleID]].second;
+      selTactic = TacticFactory::instance()->Create(tID, roleBotMapping[roleID]);
+      
+      fstream f;
+      f.open("/home/gunjan/catkin_ws/src/play/completed.txt",fstream::out | fstream::app);
+      f<<"roleBotMapped ID ="<<roleBotMapping[roleID]<<" size -- "<<currTacticIdx[roleID]<<" -- "<<currPlay->roleList[roleID].size()<<" -- is completed ="<<(*selTactic).isCompleted(bs,tParam)<<endl;
+      f.close();
+
+      if(currTacticIdx[roleID]<currPlay->roleList[roleID].size()-1 || (*selTactic).isCompleted(bs,tParam)==false)
         return false;
+
+      selTactic.reset();
     }
     return true;
   }

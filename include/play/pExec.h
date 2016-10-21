@@ -59,9 +59,9 @@ namespace Strategy
 
     void evaluatePlay(void);
 
-    bool playTerminated(void);
+    bool playTerminated(krssg_ssl_msgs::BeliefState &bs);
 
-    bool playCompleted(void);
+    bool playCompleted(krssg_ssl_msgs::BeliefState &bs);
   }; // class PExec
 } // namespace Strategy
 

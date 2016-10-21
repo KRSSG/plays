@@ -67,15 +67,20 @@ void publishing()
   //****************************************************************
   if(pExec==NULL)
     pExec = new PExec(&state,n);
-   
-   if(pExec->playTerminated())
-    {
-      pExec->evaluatePlay();
-      delete pExec;
-      pExec = new PExec(&state,n);
-      robot=pExec->selectPlay(state);
-    }
-      robot=pExec->executePlay(state);
+  
+  fstream f;
+  f.open("/home/gunjan/catkin_ws/src/play/playRunning.txt",fstream::out | fstream::app);
+  f<<"play terminated: "<<pExec->playTerminated(state)<<endl;
+  f.close();
+
+ if(pExec->playTerminated(state))
+  {
+    pExec->evaluatePlay();
+    delete pExec;
+    pExec = new PExec(&state,n);
+    robot=pExec->selectPlay(state);
+  }
+  robot=pExec->executePlay(state);
   
   
   tp0.tID = std::string(robot[0]->tID);
