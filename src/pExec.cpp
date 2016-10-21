@@ -60,10 +60,10 @@ namespace Strategy
         {
           bestBot=currPlay->recvrID;
         }
-        // else if(tID.compare("TDribbleTurnPass")==0)
-        // {
-        //   bestBot=currPlay->pasrID;
-        // }
+        else if(tID.compare("TDribbleTurnPass")==0)
+        {
+          bestBot=currPlay->pasrID;
+        }
         else if (tID.compare("TPassToPoint")==0)
         {
           bestBot=currPlay->pasrID;

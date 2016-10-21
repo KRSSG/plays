@@ -161,12 +161,12 @@ namespace Strategy
       roleList[0].push_back(std::make_pair("TDribbleTurnPass", param));
       cout<<"new : "<<roleList[0][0].second.DribbleTurnPassP.x<<" "<<roleList[0][0].second.DribbleTurnPassP.y<<"\n";
       param.AttackSupportP.id=state.our_bot_closest_to_ball;
-      roleList[0].push_back(std::make_pair("TAttackSupport1_Center", param));
+      roleList[0].push_back(std::make_pair("TReceive", param));
 
       param.ReceiveP.x=destPassPoint.x;
       param.ReceiveP.y=destPassPoint.y;
       roleList[1].push_back(std::make_pair("TReceive", param));
-      roleList[1].push_back(std::make_pair("TKickToGoal", param));
+      roleList[1].push_back(std::make_pair("TDribbleTurnPass", param));
 
      
       roleList[2].push_back(std::make_pair("TGoalie", param));
@@ -174,17 +174,17 @@ namespace Strategy
 
       param.AttackSupportP.id=state.our_bot_closest_to_ball;
       roleList[3].push_back(std::make_pair("TAttackSupport1_Center", param));
-      roleList[3].push_back(std::make_pair("TKickToGoal", param));
+      //roleList[3].push_back(std::make_pair("TKickToGoal", param));
 
       param.AttackSupportP.id=state.our_bot_closest_to_ball;
       roleList[4].push_back(std::make_pair("TAttackSupport1_Wing", param));
-      roleList[4].push_back(std::make_pair("TKickToGoal", param));
+      //roleList[4].push_back(std::make_pair("TKickToGoal", param));
 
       param.PositionP.x= -HALF_FIELD_MAXX;
       param.PositionP.y= -HALF_FIELD_MAXY ;
       param.PositionP.finalSlope= PI/4;
       roleList[5].push_back(std::make_pair("TPosition", param));
-      roleList[5].push_back(std::make_pair("TStop", param));
+      //roleList[5].push_back(std::make_pair("TStop", param));
      
     }
 
