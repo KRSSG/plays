@@ -309,7 +309,7 @@ namespace Strategy
      * instead of being done in the done() function of the individual plays
      */
     fstream f;
-    f.open("/home/gunjan/catkin_ws/src/play/completed.txt",fstream::out | fstream::app);
+    f.open("/home/ssl/catkin_ws/src/plays/completed.txt",fstream::out | fstream::app);
     f<<"play completed "<<playCompleted(bs)<<endl;
     f.close();
     if (playCompleted(bs))
@@ -341,7 +341,7 @@ namespace Strategy
       selTactic = TacticFactory::instance()->Create(tID, roleBotMapping[roleID]);
       
       fstream f;
-      f.open("/home/gunjan/catkin_ws/src/play/completed.txt",fstream::out | fstream::app);
+      f.open("/home/ssl/catkin_ws/src/plays/completed.txt",fstream::out | fstream::app);
       f<<"roleBotMapped ID ="<<roleBotMapping[roleID]<<" size -- "<<currTacticIdx[roleID]<<" -- "<<currPlay->roleList[roleID].size()<<" -- is completed ="<<(*selTactic).isCompleted(bs,tParam)<<endl;
       f.close();
 

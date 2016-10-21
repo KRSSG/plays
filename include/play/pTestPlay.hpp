@@ -26,7 +26,9 @@ namespace Strategy
       PositionPlay = PLAYTYPE_YES;
       AttackPlay   = PLAYTYPE_NO;
       Tactic::Param param;
-      //for (int botIDx=0; botIDx<HomeTeam::SIZE; ++botIDx)     
+      //for (int botIDx=0; botIDx<HomeTeam::SIZE; ++botIDx) 
+      roleList[0].push_back(std::make_pair("TKickToGoal", param));  
+      roleList[0].push_back(std::make_pair("TStop",param));  
       param.PositionP.x=CENTER_X;
       param.PositionP.y=CENTER_Y;
       param.PositionP.finalSlope=0;
@@ -90,7 +92,8 @@ namespace Strategy
 
       for(int i=0;i<HomeTeam::SIZE;i++)
         roleList[i].clear();
-
+      
+      roleList[0].push_back(std::make_pair("TKickToGoal", param));    
       param.PositionP.x=CENTER_X;
       param.PositionP.y=CENTER_Y;
       param.PositionP.finalSlope=0;
