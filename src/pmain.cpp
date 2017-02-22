@@ -24,7 +24,8 @@ void publishing();
 
 void Callback(const krssg_ssl_msgs::BeliefState::ConstPtr& msg)
 {
-    
+  fstream f;
+  f.open("/home/kgpkubs/ssl/src/plays/positon.txt",fstream::app);
  // ROS_INFO("in Callback %f ",msg->ballPos.x);
   state.isteamyellow=msg->isteamyellow;
   state.frame_number=msg->frame_number ;
@@ -45,6 +46,13 @@ void Callback(const krssg_ssl_msgs::BeliefState::ConstPtr& msg)
   state.ball_at_corners=msg->ball_at_corners;
   state.ball_in_our_half=msg->ball_in_our_half;
   state.ball_in_our_possession=msg->ball_in_our_possession;
+  
+  // f<<"x: "<<msg->homePos[4].x<<" y: "<<msg->homePos[4].y<<"\n";
+  // f<<"ball -- x: "<<msg->ballPos.x<<" y: "<<msg->ballPos.y<<"\n";
+  cout<<"ball -- x: "<<msg->ballPos.x<<" y: "<<msg->ballPos.y<<"\n";
+  cout<<"x: "<<msg->homePos[1].x<<" y: "<<msg->homePos[1].y<<endl;
+  cout<<"awayDetected: "<<msg->awayDetected.size()<<" homeDetected: "<<msg->homeDetected.size()<<endl;
+  // f.close();
   publishing();
   return;
 }
@@ -105,7 +113,7 @@ void publishing()
   
   tp5.tID = std::string(robot[5]->tID);
   tp5.tParamJSON =robot[5]->tParamJSON;
-  printf("Bot 5 %s %s\n",tp5.tID.c_str(),(tp5.tParamJSON.c_str()));
+//  printf("Bot 5 %s %s\n",tp5.tID.c_str(),(tp5.tParamJSON.c_str()));
 
   tp0_pub.publish(tp0);
   tp1_pub.publish(tp1);
